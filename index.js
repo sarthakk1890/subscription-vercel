@@ -3,13 +3,31 @@ const Razorpay = require('razorpay');
 const CryptoJS = require('crypto-js');
 const Payment = require("./models/paymentModel");
 const User = require("./models/userModel");
+const mongoose = require("mongoose");
 
 const app = express();
 const PORT = 8000;
 
+const MONGO_URI = "mongodb+srv://cuteuserapplication:6pJZF7O378xMZf9A@cluster0.pwy7y3n.mongodb.net/?retryWrites=true&w=majority"
+
+const connectDatabase = () => {
+    mongoose.set("strictQuery", false);
+
+    mongoose
+        .connect(MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        })
+        .then((data) => {
+            console.log(`Mongodb connected with server : ${data.connection.host}`);
+        });
+};
+connectDatabase();
+
 const RAZORPAY_SUBSCRIPTION_PLAN_ID = "plan_NfPU48dijLvW9G"
 const RAZORPAY_SUBSCRIPTION_API_KEY = "rzp_live_KsxB9mILdGLLj3"
 const RAZORPAY_SUBSCRIPTION_SECRET_KEY = "KYlU5W0hGJSDrP6OyI12Vc41"
+
 
 const instance = new Razorpay({
     key_id: RAZORPAY_SUBSCRIPTION_API_KEY,
