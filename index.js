@@ -19,11 +19,6 @@ const instance = new Razorpay({
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Default route
-app.use("/", function (req, res) {
-    res.json({ message: "Service is live" });
-});
-
 // Controller to create a subscription
 app.post('/create-subscription', async function (req, res) {
     try {
@@ -84,6 +79,10 @@ app.post('/payment-verification', async function (req, res) {
     }
 });
 
+// Default route
+app.use("/", function (req, res) {
+    res.json({ message: "Service is live" });
+});
 
 // Start server
 app.listen(PORT, function () {
