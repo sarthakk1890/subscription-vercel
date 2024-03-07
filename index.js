@@ -4,6 +4,7 @@ const CryptoJS = require('crypto-js');
 const Payment = require("./models/paymentModel");
 const User = require("./models/userModel");
 const mongoose = require("mongoose");
+const cors = require("cors")
 
 const app = express();
 const PORT = 8000;
@@ -34,6 +35,14 @@ const instance = new Razorpay({
     key_secret: RAZORPAY_SUBSCRIPTION_SECRET_KEY,
 });
 
+
+const corsOptions = {
+    origin: "*", // Allow requests from any origin
+    credentials: true,
+    methods: "GET,PUT,POST,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type, Authorization, Content-Length, X-Requested-With",
+};
+app.use(cors(corsOptions));
 // Middleware to parse JSON bodies
 app.use(express.json());
 
