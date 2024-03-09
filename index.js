@@ -9,7 +9,9 @@ const cors = require("cors")
 const app = express();
 const PORT = 8000;
 
-const MONGO_URI = "mongodb+srv://cuteuserapplication:6pJZF7O378xMZf9A@cluster0.pwy7y3n.mongodb.net/?retryWrites=true&w=majority"
+const MONGO_URI1 = "mongodb+srv://cuteuserapplication:6pJZF7O378xMZf9A@cluster0.pwy7y3n.mongodb.net/?retryWrites=true&w=majority"
+const MONGO_URI= "mongodb+srv://passwordisSArthak:passwordisSArthak@cluster0.b8muydt.mongodb.net/?retryWrites=true&w=majority"
+
 
 const connectDatabase = () => {
     mongoose.set("strictQuery", false);
@@ -54,7 +56,7 @@ app.post('/create-subscription', async function (req, res) {
         const options = {
             plan_id: RAZORPAY_SUBSCRIPTION_PLAN_ID,
             customer_notify: 1,
-            total_count: 60,
+            total_count: 12,
             start_at: Math.floor(Date.now() / 1000) + (15 * 60)
         };
         const newSubscription = await instance.subscriptions.create(options);
