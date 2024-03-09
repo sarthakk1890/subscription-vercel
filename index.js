@@ -25,7 +25,7 @@ const connectDatabase = () => {
 };
 connectDatabase();
 
-const RAZORPAY_SUBSCRIPTION_PLAN_ID = "plan_NfPU48dijLvW9G"
+// const RAZORPAY_SUBSCRIPTION_PLAN_ID = "plan_NfPU48dijLvW9G"
 const RAZORPAY_SUBSCRIPTION_API_KEY = "rzp_live_KsxB9mILdGLLj3"
 const RAZORPAY_SUBSCRIPTION_SECRET_KEY = "KYlU5W0hGJSDrP6OyI12Vc41"
 
@@ -49,6 +49,8 @@ app.use(express.json());
 // Controller to create a subscription
 app.post('/create-subscription', async function (req, res) {
     try {
+        const RAZORPAY_SUBSCRIPTION_PLAN_ID = req.body.plan_id;
+
         const options = {
             plan_id: RAZORPAY_SUBSCRIPTION_PLAN_ID,
             customer_notify: 1,
