@@ -28,8 +28,8 @@ const connectDatabase = () => {
 connectDatabase();
 
 // const RAZORPAY_SUBSCRIPTION_PLAN_ID = "plan_NfPU48dijLvW9G"
-const RAZORPAY_SUBSCRIPTION_API_KEY = "rzp_live_KsxB9mILdGLLj3"
-const RAZORPAY_SUBSCRIPTION_SECRET_KEY = "KYlU5W0hGJSDrP6OyI12Vc41"
+const RAZORPAY_SUBSCRIPTION_API_KEY = "rzp_live_POHLs0RPzMbrP9"
+const RAZORPAY_SUBSCRIPTION_SECRET_KEY = "gxofUCaHaTZywAaTT3LgRsE4"
 
 
 const instance = new Razorpay({
@@ -85,7 +85,7 @@ app.post('/payment-verification', async function (req, res) {
     try {
         const { razorpay_payment_id, razorpay_signature, razorpay_subscription_id, userData } = req.body;
         const user = await User.create(userData);
-        const generated_signature = generateSignature(razorpay_payment_id, razorpay_subscription_id, process.env.RAZORPAY_SUBSCRIPTION_SECRET_KEY);
+        const generated_signature = generateSignature(razorpay_payment_id, razorpay_subscription_id, RAZORPAY_SUBSCRIPTION_SECRET_KEY);
         const isAuthentic = generated_signature === razorpay_signature;
         if (!isAuthentic) {
             await User.findByIdAndDelete(user._id);
